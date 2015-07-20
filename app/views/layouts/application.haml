@@ -14,7 +14,12 @@
         .navbar-header
           %span.navbar-brand #{AppConfig.workshops_name}
         %p.navbar-text.navbar-right
-          = link_to "Sign out", destroy_user_session_path, :method => :delete
+          - if user_signed_in? 
+            = link_to "Sign out", destroy_user_session_path, :method => :delete
+          - else
+            = link_to "Sign in", new_session_path(resource_name)
+            |
+            = link_to "Sign up", new_registration_path(resource_name)
     .container-fluid
       .row
         .col-lg-12
